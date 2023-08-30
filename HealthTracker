@@ -1,0 +1,47 @@
+class HealthTracker:
+    def __init__(self):
+        self.user_data = {}
+
+    def add_user(self, name):
+        if name not in self.user_data:
+            self.user_data[name] = {'weight': [], 'steps': [], 'calories': []}
+            print(f"User '{name}' added to the tracker.")
+
+    def add_weight_entry(self, name, weight):
+        if name in self.user_data:
+            self.user_data[name]['weight'].append(weight)
+            print(f"Weight entry added for '{name}': {weight} kg.")
+
+    def add_steps_entry(self, name, steps):
+        if name in self.user_data:
+            self.user_data[name]['steps'].append(steps)
+            print(f"Steps entry added for '{name}': {steps} steps.")
+
+    def add_calories_entry(self, name, calories):
+        if name in self.user_data:
+            self.user_data[name]['calories'].append(calories)
+            print(f"Calories entry added for '{name}': {calories} calories.")
+
+    def get_summary(self, name):
+        if name in self.user_data:
+            user_metrics = self.user_data[name]
+            avg_weight = sum(user_metrics['weight']) / len(user_metrics['weight'])
+            total_steps = sum(user_metrics['steps'])
+            total_calories = sum(user_metrics['calories'])
+
+            print(f"Health summary for '{name}':")
+            print(f"Average Weight: {avg_weight:.2f} kg")
+            print(f"Total Steps: {total_steps} steps")
+            print(f"Total Calories: {total_calories} calories")
+        else:
+            print(f"'{name}' not found in the tracker.")
+
+# Example usage
+tracker = HealthTracker()
+
+tracker.add_user("Alice")
+tracker.add_weight_entry("Alice", 65)
+tracker.add_steps_entry("Alice", 8000)
+tracker.add_calories_entry("Alice", 1500)
+
+tracker.get_summary("Alice")
